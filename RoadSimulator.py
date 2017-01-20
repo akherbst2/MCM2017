@@ -9,7 +9,7 @@ except ImportError:
     from tkinter import *
 
 Window_Width=1000
-Window_Height=700
+Window_Height=600
 laneWidth_ft = 12
 buffer = 100
 lanes = 8
@@ -53,13 +53,16 @@ class Road:
         
         
 def readFile():
-     f = open("CarData2.csv")
+     f = open("CarData3.csv")
      rows = csv.reader(f)
      #next(rows, None)
      return rows
  
 def exitWindow(root):
     root.destroy()
+    
+def pause():
+    canvas.after(3000)
         
 def main():
     File = readFile()
@@ -74,16 +77,22 @@ def main():
     canvas = Canvas(root, bg="#632", width=Window_Width, height=Window_Height)
     canvas.pack()
     road = Road()
+    pauseButton = Button(root, text="OK", command=pause, state="active")
+    pauseButton.pack(side=LEFT)
     vehicle_Dict = {}
     t = 0
-    
     """start animation"""
     for line in File:
-        if line[0] == "stop":
+        if line[0] == "STOP":
+            canvas.delete(vehicle_Dict[line[1]].rect)
             del vehicle_Dict[line[1]]
             continue
+        if line[0] == "CRASH":
+            canvas.itemconfig(vehicle_Dict.get(line[1]).rect,fill="red")
+            #canvas.itemconfig(vehicle_Dict.get(line[2]).rect,fill="red")
+            continue
         if not t == line[0]:
-            canvas.after(50)
+            canvas.after(90)
             t = line[0]
         vehicle = vehicle_Dict.get(line[1])
         if vehicle == None:
