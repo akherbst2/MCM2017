@@ -12,11 +12,20 @@ import static java.lang.Math.*;
 
 public class Road {
     private int AverageDailyTrafficCounts;
-    private double timeSinceLastCar;
+    //private double timeSinceLastCar;
     private List<Car> cars;
 
     public Road(int averageDailyTrafficCounts) {
         AverageDailyTrafficCounts = averageDailyTrafficCounts;
+    }
+
+    /**
+     * TODO Make this return something unique
+     * @return
+     */
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     /**
@@ -29,18 +38,18 @@ public class Road {
 
     public void addCar(Car car) {
         this.cars.add(car);
-        this.timeSinceLastCar -= this.getTimeLapsePerCar();
+        //this.timeSinceLastCar -= this.getTimeLapsePerCar();
     }
 
     public int getAverageDailyTrafficCounts() {
         return AverageDailyTrafficCounts;
     }
 
-    public double getTimeSinceLastCar() {
-        return timeSinceLastCar;
-    }
-
-    public void advanceTimeBy(double time) {
-        timeSinceLastCar += time;
-    }
+//    public double getTimeSinceLastCar() {
+//        return timeSinceLastCar;
+//    }
+//
+//    public void advanceTimeBy(double time) {
+//        timeSinceLastCar += time;
+//    }
 }

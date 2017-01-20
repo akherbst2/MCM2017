@@ -21,18 +21,23 @@ public class CarGenerator {
     private double currentTime;
     private double timeTickSize;
     private List<Road> roads;//  Gets the frequency from roads
+    HashMap<Road, Double> timeSinceLastCar;
 
 
     public CarGenerator(List<Road> roads, double currentTime, double timeTickSize) {
         this.roads = roads;
         this.currentTime = currentTime;
         this.timeTickSize = timeTickSize;
+        timeSinceLastCar = new HashMap<>();
+        for(Road road: roads) {
+            timeSinceLastCar.put(road, 0.0);
+        }
     }
 
     private void advanceTime() {
         currentTime += timeTickSize;
         for(Road road:roads) {
-            road.advanceTimeBy(timeTickSize);
+            timeSinceLastCar.put(road, timeSinceLastCar.get(road) + timeTickSize);
         }
     }
 
