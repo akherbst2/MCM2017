@@ -7,14 +7,14 @@
 
 import java.util.*;
 
-public class Road {
+public class AlyssaRoad {
 
     private int index;
     private int averageDailyTrafficCounts;
     //private double timeSinceLastCar;
     private List<Car> cars;
 
-    public Road(int averageDailyTrafficCounts, int idx) {
+    public AlyssaRoad(int averageDailyTrafficCounts, int idx) {
         this.averageDailyTrafficCounts = averageDailyTrafficCounts;
         this.index = idx;
         this.cars = new ArrayList<>();
