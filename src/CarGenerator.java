@@ -1,9 +1,12 @@
-package MCM;
+//package MCM;
 
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Random;
 
 public class CarGenerator {
+	static final double STANDARD_DEV_SPEED_MPH = 5.0;
+	static final double AVG_SPEED_MPH = 60;
 	double freq;
     double currentTime;
     double timeTickSize;
@@ -11,6 +14,7 @@ public class CarGenerator {
 	int carCount = 0;
 	double initialSpeedOfCar;
 	double[] timeLastCar;
+	Random random;
 	public CarGenerator(Scanner input, Road road, int numberOfLanes, double freq, double timeStep){
 		this.freq = freq;
 		this.road = road;
@@ -19,6 +23,7 @@ public class CarGenerator {
 		currentTime = 0;
 		timeLastCar = new double[numberOfLanes];
 		Arrays.fill(timeLastCar, currentTime-1000);
+		this.random = new Random();
 	}
 	
 	public void advanceTime() {
@@ -36,11 +41,14 @@ public class CarGenerator {
 				laneId = a;
 			}
 		}
-		
+		//
 		if(Math.random() < freq * timeTickSize){
 			carCount++;
 			timeLastCar[laneId] = currentTime;
-			return new Car(road, laneId, road.roadWidth, 88, carCount);
+
+			double randomInitialSpeed_ftpersec = (random.nextGaussian() * STANDARD_DEV_SPEED_MPH + AVG_SPEED_MPH) * (88.0 / 60);
+
+			return new Car(road, laneId, road.roadWidth, randomInitialSpeed_ftpersec, carCount);
 		}
 		return null;
 	}
