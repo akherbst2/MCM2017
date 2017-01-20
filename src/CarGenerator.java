@@ -1,5 +1,3 @@
-package MCM;
-
 public class CarGenerator {
 	double freq;
 	Road road;
