@@ -12,7 +12,7 @@ public class Driver {
 
 		double laneWidth = 12;
 		double freq = 4;
-
+		System.out.println(500 + "," + numberOfLanes);
 		Road road = new Road(laneWidth);
 		CarGenerator generator = new CarGenerator(input, road, numberOfLanes, freq, timeInterval);
 		for (double time = 0.0; time < numberOfTimeIntervals * timeInterval; time += timeInterval) {

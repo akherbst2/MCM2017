@@ -41,8 +41,8 @@ public class CarGenerator {
 				laneId = a;
 			}
 		}
-		//
-		if(Math.random() < freq * timeTickSize){
+
+		if(Math.random() < freq * timeTickSize && road.numberOfCars() < 500){
 			carCount++;
 			timeLastCar[laneId] = currentTime;
 

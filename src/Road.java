@@ -2,6 +2,7 @@
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Road {
@@ -16,7 +17,9 @@ public class Road {
 	public void addCar(Car c) {
 		carList.add(c);
 	}
-
+	public int numberOfCars(){
+		return carList.size();
+	}
 	public void executeTime(double timeInterval) {
 		for (Car i : carList) {
 			i.move(timeInterval);
@@ -24,7 +27,7 @@ public class Road {
 		// CollisionCheck
 		for (Car i : carList) {
 			for (Car j : carList) {
-				if (i != j) {
+				if (i.id < j.id) {
 					if (i.isCollision(j)) {
 						i.xVel = 0;
 						i.yVel = 0;
@@ -34,16 +37,14 @@ public class Road {
 				}
 			}
 		}
-		LinkedList<Car> temp = new LinkedList<Car>();
-
-		for (Car i : carList) {
-			if (i.yPos < 500) {
-				temp.add(i);
-			} else {
-				System.out.println("STOP " + i.id);
+		Iterator<Car> iter = carList.iterator();
+		while (iter.hasNext()) {
+			Car i = iter.next();
+			if (i.yPos >= 500) {
+				iter.remove();
+				System.out.println("STOP," + i.id);
 			}
 		}
-		carList = temp;
 
 	}
 
