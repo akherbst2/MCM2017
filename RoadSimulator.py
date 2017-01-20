@@ -24,7 +24,10 @@ class Vehicle:
         #self.speed = speed
         
     def __eq__(self, other):
-        return self.id == other.id
+        if other == None:
+            return FALSE
+        else:
+            return self.id == other.id
     
     def __nq__(self, other):
         return not self.__eq__(other)
@@ -60,11 +63,12 @@ def main():
             t = line[0]
         vehicle = vehicle_Dict.get(line[1])
         if vehicle == None:
-            vehicle_Dict[line[1]] = Vehicle(line[1], line[2], line[3],
-                                            line[4], line[5])
+            vehicle_Dict[line[1]] = Vehicle(int(line[1]), int(line[2]), int(line[3]),
+                                            int(line[4]), int(line[5]))
         else:
-            vehicle.animate()
+            vehicle.animate(int(line[2]), int(line[3]))
         root.update()
+    canvas.after(1000)
     
     
 main()
