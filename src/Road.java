@@ -6,17 +6,22 @@
  */
 
 import java.util.*;
-import java.io.*;
-
-import static java.lang.Math.*;
 
 public class Road {
-    private int AverageDailyTrafficCounts;
+
+    private int index;
+    private int averageDailyTrafficCounts;
     //private double timeSinceLastCar;
     private List<Car> cars;
 
-    public Road(int averageDailyTrafficCounts) {
-        AverageDailyTrafficCounts = averageDailyTrafficCounts;
+    public Road(int averageDailyTrafficCounts, int idx) {
+        this.averageDailyTrafficCounts = averageDailyTrafficCounts;
+        this.index = idx;
+        this.cars = new ArrayList<>();
+    }
+
+    public List<Car> getCars() {
+        return cars;
     }
 
     /**
@@ -25,7 +30,7 @@ public class Road {
      */
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return this.index;
     }
 
     /**
@@ -33,7 +38,7 @@ public class Road {
      * @return
      */
     public double getTimeLapsePerCar() {
-        return  (this.getAverageDailyTrafficCounts()) / (24.0 * 60 * 60);
+        return  (24.0 * 60 * 60) / (this.getAverageDailyTrafficCounts());
     }
 
     public void addCar(Car car) {
@@ -42,7 +47,7 @@ public class Road {
     }
 
     public int getAverageDailyTrafficCounts() {
-        return AverageDailyTrafficCounts;
+        return averageDailyTrafficCounts;
     }
 
 //    public double getTimeSinceLastCar() {

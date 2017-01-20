@@ -36,9 +36,6 @@ public class CarGenerator {
 
     private void advanceTime() {
         currentTime += timeTickSize;
-        for(Road road:roads) {
-            timeSinceLastCar.put(road, timeSinceLastCar.get(road) + timeTickSize);
-        }
     }
 
     //Adds cars where appropriate onto the road
@@ -50,11 +47,16 @@ public class CarGenerator {
             double timeLapsePerCar = road.getTimeLapsePerCar();
             //if the time that the car should have passed has passed sometime within the last time interval
             //then send out a car at that time.
-
-            if(road.getTimeSinceLastCar() >= timeLapsePerCar) {
+            double currentTimeSinceLastCar = timeSinceLastCar.get(road) + timeTickSize;
+            timeSinceLastCar.put(road, currentTimeSinceLastCar);
+            if(currentTimeSinceLastCar >= timeLapsePerCar) {
+                timeSinceLastCar.put(road, currentTimeSinceLastCar - timeLapsePerCar);
                 road.addCar(new Car());
-
+                if(timeSinceLastCar.get(road) >= timeLapsePerCar) {
+                    throw new IllegalStateException("Your Time Interval is too large for the current speed of the cars.  Please make your time interval smaller.");
+                }
             }
+
         }
     }
 }
