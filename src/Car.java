@@ -10,6 +10,7 @@ public class Car {
 	double breakPotential;
 	double aggressiveness;
 	Road road;
+	int laneChangeState;
 	int lane;
 	int xSize;
 	int ySize;
@@ -24,15 +25,23 @@ public class Car {
 		xVel = 0;
 		xSize = 6;
 		ySize = 12;
+		laneChangeState = 0;
 	}
 	
 	
 	public void move(double timeInterval){
 		xPos += xVel * timeInterval;
 		yPos += yVel * timeInterval;
+		
+//		if(laneChangeState == 1){
+//			xVel += 
+//		}
+		
+		
+		
 	}
 	public String toString(){
-		return "Car ID: " + id + " X: " + xPos + " Y: " + yPos + " Lane: " + lane;
+		return id + "," + xPos + "," + yPos + "," + xSize + "," + ySize;
 	}
 
 

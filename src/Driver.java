@@ -11,10 +11,10 @@ public class Driver {
 		int numberOfLanes = input.nextInt();
 
 		double laneWidth = 12;
-		double freq = 40;
+		double freq = 4;
 
 		Road road = new Road(laneWidth);
-		CarGenerator generator = new CarGenerator(road, numberOfLanes, freq, timeInterval);
+		CarGenerator generator = new CarGenerator(input, road, numberOfLanes, freq, timeInterval);
 		for (double time = 0.0; time < numberOfTimeIntervals * timeInterval; time += timeInterval) {
 
 			Car temp = generator.getCar();
@@ -25,8 +25,7 @@ public class Driver {
 			road.executeTime(timeInterval);
 			generator.advanceTime();
 
-			System.out.println("TIME: " + time + ": ");
-			road.printState();
+			road.printState(time);
 
 		}
 

@@ -1,6 +1,7 @@
 package MCM;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class CarGenerator {
 	double freq;
@@ -10,7 +11,7 @@ public class CarGenerator {
 	int carCount = 0;
 	double initialSpeedOfCar;
 	double[] timeLastCar;
-	public CarGenerator(Road road, int numberOfLanes, double freq, double timeStep){
+	public CarGenerator(Scanner input, Road road, int numberOfLanes, double freq, double timeStep){
 		this.freq = freq;
 		this.road = road;
 		this.timeTickSize = timeStep;
