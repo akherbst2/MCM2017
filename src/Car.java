@@ -85,7 +85,7 @@ public class Car {
 		double followDistance = (yVel / 10) * ySize;
 		Car closest = getCarInFront();
 
-		if((closest != null)&&((closest.yPos - this.yPos) < followDistance)) {
+		if(!crashed&&(closest != null)&&((closest.yPos - this.yPos) < followDistance)) {
 			if(isExpectedCrash(closest)) {
 				attemptLaneChange();
 			}
@@ -93,7 +93,13 @@ public class Car {
 				//Slows down at an acceleration that is somewhere between the minimum deceleration needed
 				//to not crash, and the max acceleration of the car
 				double minAccel = getMinAccelNeededToNotCrash(closest);
-				yAccel = -1 * ((minAccel + ACCEL_LIMIT) / 2);
+				if(closest.yVel == 0) {
+					yAccel = 0;
+					yVel = 0;
+				}
+				else {
+					yAccel = -1 * ((minAccel + ACCEL_LIMIT) / 2);
+				}
 			}
 		}
 		else if(yVel < INITIAL_SPEED) {
@@ -105,6 +111,12 @@ public class Car {
 			else {
 				yVel += (ACCEL_LIMIT * timeInterval);
 			}
+		}
+		else if(crashed) {
+			yVel = 0;
+			xVel = 0;
+			yAccel = 0;
+			xAccel = 0;
 		}
 	}
 
