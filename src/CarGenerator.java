@@ -7,6 +7,7 @@ import java.util.Random;
 public class CarGenerator {
 	static final double STANDARD_DEV_SPEED_MPH = 5;
 	static final double AVG_SPEED_MPH = 60;
+	static final double percentSmartCars = .1;
 	double freq;
     double currentTime;
     double timeTickSize;
@@ -47,8 +48,10 @@ public class CarGenerator {
 			timeLastCar[laneId] = currentTime;
 
 			double randomInitialSpeed_ftpersec = (random.nextGaussian() * STANDARD_DEV_SPEED_MPH + AVG_SPEED_MPH) * (88.0 / 60);
-
-			return new Car(road, laneId, road.roadWidth, randomInitialSpeed_ftpersec, carCount);
+		
+			boolean isSmart = Math.random() < percentSmartCars;		
+	
+			return new Car(road, laneId, road.roadWidth, randomInitialSpeed_ftpersec, carCount, isSmart);
 		}
 		return null;
 	}

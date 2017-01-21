@@ -20,8 +20,9 @@ public class Car {
 	int xSize;
 	int ySize;
 	int id;
+	boolean isSmart;
 	boolean crashed;
-	public Car(Road road, int lane, double laneWidth, double initialSpeed, int carCount) {
+	public Car(Road road, int lane, double laneWidth, double initialSpeed, int carCount, boolean isSmart) {
 		this.road = road;
 		this.lane = lane;
 		xPos = lane * laneWidth + .5 * laneWidth;
@@ -36,6 +37,7 @@ public class Car {
 		laneChangeState = 0;
 		xAccel = 0;
 		yAccel = 0;
+		this.isSmart = isSmart;
 	}
 /*
 	//other car must be in front of my car
