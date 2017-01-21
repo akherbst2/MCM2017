@@ -5,6 +5,10 @@ public class Car {
 	double yPos;
 	double xVel;
 	double yVel;
+	double xAccel;
+	double yAccel;
+	//maximum accel or decel in ft/s
+	static final double ACCEL_LIMIT = 15;
 	// double accPotential;
 	// double breakPotential;
 	// double aggressiveness;
@@ -28,9 +32,28 @@ public class Car {
 		xSize = 6;
 		ySize = 12;
 		laneChangeState = 0;
+		xAccel = 0;
+		yAccel = 0;
 	}
 
+	//other car must be in front of my car
+	boolean isExpectedCrash(Car other) {
+		if(other.yVel < this.yVel) {
+			double vRel = other.yVel - this.yVel;
+			double carDist = other.yPos - this.yPos - ySize;
+
+			double minAccelNeededToNotCrash = (Math.pow(vRel, 2))/(2*(carDist)) - other.yAccel;
+			return Math.abs(minAccelNeededToNotCrash) > ACCEL_LIMIT;
+		}
+		return false;
+	}
+
+
 	public void move(double timeInterval) {
+
+		//make acceleration decisions
+
+
 		xPos += xVel * timeInterval;
 		yPos += yVel * timeInterval;
 
