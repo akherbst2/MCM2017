@@ -54,7 +54,16 @@ class Road:
         
         
 def readFile():
-     f = open("CarData3.csv")
+     ''' Reads from the specified file on the command line 
+         or the default file (CarData3.csv) if a file is not specified '''
+     import argparse
+     parser = argparse.ArgumentParser()
+     parser.add_argument("--csv_file")
+     args = parser.parse_args()
+     if args.csv_file:
+         f = open(args.csv_file)
+     else:
+         f = open("CarData3.csv")
      rows = csv.reader(f)
      #next(rows, None)
      return rows
