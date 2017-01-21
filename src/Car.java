@@ -26,7 +26,7 @@ public class Car {
 		this.road = road;
 		this.lane = lane;
 		xPos = lane * laneWidth + .5 * laneWidth;
-		yPos = -1000;
+		yPos = 0;
 		id = carCount;
 		yVel = initialSpeed;
 		this.INITIAL_SPEED = initialSpeed;
@@ -209,7 +209,7 @@ public class Car {
 
 	public String toString() {
 		return id + "," + xPos + "," + yPos + "," + xSize + "," + ySize
-				+ (DEBUG ? " lane: " + lane + " lane change: " + laneChangeState : "");
+				+ (DEBUG ? " lane: " + lane + " lane change: " + laneChangeState : "" + "," + isSmart);
 	}
 
 	public boolean isCollision(Car j) {

@@ -48,8 +48,7 @@ public class CarGenerator {
 			timeLastCar[laneId] = currentTime;
 
 			double randomInitialSpeed_ftpersec = (random.nextGaussian() * STANDARD_DEV_SPEED_MPH + AVG_SPEED_MPH) * (88.0 / 60);
-		
-			boolean isSmart = Math.random() < percentSmartCars;		
+			boolean isSmart =  (Math.random() < percentSmartCars);		
 	
 			return new Car(road, laneId, road.roadWidth, randomInitialSpeed_ftpersec, carCount, isSmart);
 		}

@@ -19,12 +19,18 @@ deltaT = .1
 unpaused = False
 
 class Vehicle:
-    def __init__(self, id, xloc, yloc, xsize, ysize):
+    def __init__(self, id, xloc, yloc, xsize, ysize, isSmart):
         self.id = id
+	if (isSmart == 'true'):
+            self.isSmart = True
+            self.color = 'blue'
+        else:
+            self.isSmart = False
+            self.color = 'green'
         self.rect = canvas.create_rectangle(buffer + (xloc - (xsize / 2.0)) * scale , 
                                             Window_Height -( yloc + ysize) * scale,
                                              buffer + (xloc + (xsize / 2.0)) * scale, Window_Height - yloc*scale,
-                                              fill='green')
+                                              fill=self.color)
         #print(scale)
         
         self.xloc = xloc
@@ -63,7 +69,7 @@ def readFile():
      if args.csv_file:
          f = open(args.csv_file)
      else:
-         f = open("CarData3.csv")
+         f = open("latest_run_sim.csv")
      rows = csv.reader(f)
      #next(rows, None)
      return rows
@@ -118,7 +124,7 @@ def main():
         vehicle = vehicle_Dict.get(line[1])
         if vehicle == None:
             vehicle_Dict[line[1]] = Vehicle(float(line[1]), float(line[2]), float(line[3]),
-                                            float(line[4]), float(line[5]))
+                                            float(line[4]), float(line[5]), line[6])
         else:
             vehicle.animate(float(line[2]), float(line[3]))
         root.update()
