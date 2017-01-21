@@ -1,3 +1,6 @@
+#java specifics added by Eric
+*.class
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

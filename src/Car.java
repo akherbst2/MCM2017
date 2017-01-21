@@ -157,7 +157,7 @@ public class Car {
 
 	}
 
-	static boolean DEBUG = true;
+	static boolean DEBUG = false;
 
 	public String toString() {
 		return id + "," + xPos + "," + yPos + "," + xSize + "," + ySize
@@ -167,9 +167,15 @@ public class Car {
 	public boolean isCollision(Car j) {
 		boolean xOverlap = Math.abs(xPos - j.xPos) < (xSize + j.xSize) / 2.0;
 		boolean yOverlap = Math.abs(yPos - j.yPos) < (ySize + j.ySize) / 2.0;
-		if (xOverlap && yOverlap && !crashed) {
+		if (xOverlap && yOverlap) {
+                        if(!crashed){
 			System.out.println("CRASH," + id);
 			crashed = true;
+                        }
+                        if(!j.crashed){
+                        System.out.println("CRASH,"+j.id);
+                        j.crashed = true;
+                        }
 		}
 		return xOverlap && yOverlap;
 	}
