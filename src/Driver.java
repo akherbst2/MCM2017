@@ -21,11 +21,10 @@ public class Driver {
 			if (temp != null) {
 				road.addCar(temp);
 			}
-
+                        road.printState(time);
 			road.executeTime(timeInterval);
 			generator.advanceTime();
 
-			road.printState(time);
 
 		}
 
