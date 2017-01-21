@@ -9,13 +9,14 @@ except ImportError:
     from tkinter import *
 
 Window_Width=1000
-Window_Height=600
+Window_Height=700
 laneWidth_ft = 12
 buffer = 100
 lanes = 8
 scale = 1
 t = 0
 deltaT = .1
+unpaused = False
 
 class Vehicle:
     def __init__(self, id, xloc, yloc, xsize, ysize):
@@ -62,7 +63,16 @@ def exitWindow(root):
     root.destroy()
     
 def pause():
-    canvas.after(3000)
+    global unpaused
+    while not unpaused:
+        root.update()
+        canvas.after(10)
+    else:
+        unpaused = False
+def play():
+    global unpaused
+    unpaused = True
+    root.after(20)
         
 def main():
     File = readFile()
@@ -72,13 +82,16 @@ def main():
     scale = Window_Height * 1.0 / float(sizes[0])
     lanes = int(sizes[1])
     Window_Width = lanes * laneWidth_ft * scale + buffer * 2
+    global root
     root = Tk()
     global canvas
     canvas = Canvas(root, bg="#632", width=Window_Width, height=Window_Height)
     canvas.pack()
     road = Road()
-    pauseButton = Button(root, text="OK", command=pause, state="active")
+    pauseButton = Button(root, text="Pause", command=pause, state="normal")
+    playButton = Button(root, text="Play", command=play, state="normal") 
     pauseButton.pack(side=LEFT)
+    playButton.pack(side=LEFT)
     vehicle_Dict = {}
     t = 0
     """start animation"""
@@ -89,10 +102,9 @@ def main():
             continue
         if line[0] == "CRASH":
             canvas.itemconfig(vehicle_Dict.get(line[1]).rect,fill="red")
-            #canvas.itemconfig(vehicle_Dict.get(line[2]).rect,fill="red")
             continue
         if not t == line[0]:
-            canvas.after(90)
+            canvas.after(30)
             t = line[0]
         vehicle = vehicle_Dict.get(line[1])
         if vehicle == None:
