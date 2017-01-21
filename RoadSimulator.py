@@ -128,7 +128,7 @@ def main():
         else:
             vehicle.animate(float(line[2]), float(line[3]))
         root.update()
-    canvas.after(10000)
+    canvas.after(3000)
 
 main()
 

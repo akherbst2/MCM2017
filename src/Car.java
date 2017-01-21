@@ -65,7 +65,7 @@ public class Car {
 				//if other car is in front
 			if(12 > Math.abs(other.xPos-this.xPos)){
                          	if(other.yPos > this.yPos+ySize) {
-					if((other.yPos - this.yPos) < closestDist) {
+					if((other.yPos - this.yPos) < closestDist ) {  
 						closestCar = other;
 						closestDist = other.yPos - this.yPos;
 					}
@@ -143,7 +143,7 @@ public class Car {
 		//makeVelocityAndAccelerationDecisions(timeInterval);
 
                 Car temp = getCarInFront();
-                if(temp != null && (temp.yPos - yPos) < (100 + yVel) && yVel > 0){
+                if(temp != null && (temp.yPos - yPos) < (100 + yVel) && yVel > 0 && temp.lane == lane){
                     yAccel = ACCEL_LIMIT * -1;
                 }                
                 else{
