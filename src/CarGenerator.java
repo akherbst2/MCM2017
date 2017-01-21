@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.util.Random;
 
 public class CarGenerator {
-	static final double STANDARD_DEV_SPEED_MPH = 5.0;
+	static final double STANDARD_DEV_SPEED_MPH = 5;
 	static final double AVG_SPEED_MPH = 60;
 	double freq;
     double currentTime;

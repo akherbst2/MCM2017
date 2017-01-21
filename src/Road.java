@@ -31,6 +31,8 @@ public class Road {
 					if (i.isCollision(j)) {
 						i.xVel = 0;
 						i.yVel = 0;
+                                                i.yAccel = 0;
+                                                j.yAccel = 0;
 						j.xVel = 0;
 						j.yVel = 0;
 					}
