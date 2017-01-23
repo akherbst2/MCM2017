@@ -10,7 +10,7 @@ public class Driver {
 		double timeInterval = input.nextDouble();
 		int numberOfLanes = input.nextInt();
 		
-		double laneWidth = 8;
+		double laneWidth = 12;
 		double freq = 5;
 		System.out.println(500 + "," + numberOfLanes);
 		Road road = new Road(laneWidth);
