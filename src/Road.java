@@ -73,7 +73,7 @@ public class Road {
 			Car i = iter.next();
 			if (i.yPos >= 500) {
 				iter.remove();
-				System.out.println("STOP," + i.id);
+				//System.out.println("STOP," + i.id);
 			}
 		}
 	}
@@ -96,7 +96,7 @@ public class Road {
 
 	public void printState(double time) {
 		for (Car i : carList) {
-			System.out.println(time + "," + i.toString());
+			//System.out.println(time + "," + i.toString());
 		}
 	}
 }
