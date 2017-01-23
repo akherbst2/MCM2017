@@ -89,6 +89,14 @@ public class Road {
         return getAverageVelocity_SmartCars_ftPerSec() * FT_PER_SECOND_TO_MPH;
     }
 
+    public double getAverageVelocity_AllCars_ftPerSec() {
+        return (1.0* this.allVelocitiesHumanCar + this.allVelocitiesSmartCar) / (this.instanceOfSmartCar + this.instanceOfHumanCar);
+    }
+
+    public double getAverageVelocity_AllCars_MPH() {
+        return getAverageVelocity_AllCars_ftPerSec() * FT_PER_SECOND_TO_MPH;
+    }
+
 	public void printState(double time) {
 		for (Car i : carList) {
 			System.out.println(time + "," + i.toString());
