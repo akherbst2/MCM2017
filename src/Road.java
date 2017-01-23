@@ -1,17 +1,21 @@
 //package MCM;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 
 public class Road {
 	double roadWidth;
 	LinkedList<Car> carList;
+	long totalAvgVelocity;
+	long totalIntervals;
+	long totalCars;
+
 
 	public Road(double roadWidth) {
 		carList = new LinkedList<Car>();
 		this.roadWidth = roadWidth;
+		this.totalAvgVelocity = 0;
+		this.totalIntervals = 0;
 	}
 
 	public void addCar(Car c) {
@@ -21,9 +25,14 @@ public class Road {
 		return carList.size();
 	}
 	public void executeTime(double timeInterval) {
+		totalIntervals++;
+        long myVel = 0;
 		for (Car i : carList) {
 			i.move(timeInterval);
+			myVel += i.yVel;
+
 		}
+        totalAvgVelocity += ((myVel * 1.0) / carList.size());
 		// CollisionCheck
 		for (Car i : carList) {
 			for (Car j : carList) {
@@ -48,6 +57,14 @@ public class Road {
 			}
 		}
 
+	}
+
+	public double getAverageVelocity_ftPerSec() {
+		return (1.0 * totalAvgVelocity) / totalIntervals;
+	}
+
+	public double getAverageVelocity_MPH() {
+		return getAverageVelocity_ftPerSec() * 0.6818182;
 	}
 
 	public void printState(double time) {
