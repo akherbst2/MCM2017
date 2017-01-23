@@ -110,28 +110,26 @@ def main():
     vehicle_Dict = {}
     t = 0
     """start animation"""
-    try:
-        for line in File:
-            if line[0] == "STOP":
-                canvas.delete(vehicle_Dict[line[1]].rect)
-                del vehicle_Dict[line[1]]
-                continue
-            if line[0] == "CRASH":
-                canvas.itemconfig(vehicle_Dict.get(line[1]).rect,fill="red")
-                continue
-            if not t == line[0]:
-                canvas.after(30)
-                t = line[0]
-            vehicle = vehicle_Dict.get(line[1])
-            if vehicle == None:
-                vehicle_Dict[line[1]] = Vehicle(float(line[1]), float(line[2]), float(line[3]),
-                                                float(line[4]), float(line[5]), line[6])
-            else:
-                vehicle.animate(float(line[2]), float(line[3]))
-            root.update()
-        canvas.after(3000)
-    except:
-        root.destroy()
+
+    for line in File:
+        if line[0] == "STOP":
+            canvas.delete(vehicle_Dict[line[1]].rect)
+            del vehicle_Dict[line[1]]
+            continue
+        if line[0] == "CRASH":
+            canvas.itemconfig(vehicle_Dict.get(line[1]).rect,fill="red")
+            continue
+        if not t == line[0]:
+            canvas.after(30)
+            t = line[0]
+        vehicle = vehicle_Dict.get(line[1])
+        if vehicle == None:
+            vehicle_Dict[line[1]] = Vehicle(float(line[1]), float(line[2]), float(line[3]),
+                                            float(line[4]), float(line[5]), line[6])
+        else:
+            vehicle.animate(float(line[2]), float(line[3]))
+        root.update()
+    canvas.after(3000)
 main()
 
 
