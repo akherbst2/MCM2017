@@ -27,6 +27,6 @@ public class Driver {
 
 
 		}
-
+        System.out.print("Average total velocity = " + road.getAverageVelocity_MPH() + " Miles Per hour");
 	}
 }
