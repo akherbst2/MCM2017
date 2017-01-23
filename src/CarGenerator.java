@@ -1,8 +1,6 @@
 //package MCM;
 
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Random;
+import java.util.*;
 
 public class CarGenerator {
 	static final double STANDARD_DEV_SPEED_MPH = 5;
@@ -34,13 +32,24 @@ public class CarGenerator {
 	
 	
 	public Car getCar(){
+//		int laneId = -1;
+//		double maxTimeDiff = -1;
+//		for(int a = 0; a < timeLastCar.length; a++){
+//			if(maxTimeDiff < currentTime-timeLastCar[a]){
+//				maxTimeDiff = currentTime-timeLastCar[a];
+//				laneId = a;
+//			}
+//		}
+
 		int laneId = -1;
-		double maxTimeDiff = -1;
-		for(int a = 0; a < timeLastCar.length; a++){
-			if(maxTimeDiff < currentTime-timeLastCar[a]){
-				maxTimeDiff = currentTime-timeLastCar[a];
-				laneId = a;
+		long totalTimeDiff = 0;
+		List<Double> possibleLaneTimes = new ArrayList<>();
+		List<Integer> possibleLaneIds = new ArrayList<>();
+		for(int a = 0; a < timeLastCar.length; a++) {
+			if((currentTime - timeLastCar[a]) > 12) {
+				
 			}
+
 		}
 
 		if(Math.random() < freq * timeTickSize && road.numberOfCars() < 500){
