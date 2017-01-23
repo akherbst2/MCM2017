@@ -9,7 +9,7 @@ public class Driver {
 		double numberOfTimeIntervals = input.nextDouble();
 		double timeInterval = input.nextDouble();
 		int numberOfLanes = input.nextInt();
-
+		
 		double laneWidth = 8;
 		double freq = 5;
 		System.out.println(500 + "," + numberOfLanes);
@@ -27,7 +27,7 @@ public class Driver {
 
 
 		}
-        System.out.println("Average total velocity of human cars= " + road.getAverageVelocity_HumanCars_MPH() + " Miles Per Hour");
-        System.out.println("Average total velocity of smart cars= " + road.getAverageVelocity_SmartCars_MPH() + " Miles Per Hour");
+        System.err.println("Average total velocity of human cars= " + road.getAverageVelocity_HumanCars_MPH() + " Miles Per Hour");
+        System.err.println("Average total velocity of smart cars= " + road.getAverageVelocity_SmartCars_MPH() + " Miles Per Hour");
 	}
 }
