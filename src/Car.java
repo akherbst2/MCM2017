@@ -228,11 +228,11 @@ public class Car {
 		boolean yOverlap = Math.abs(yPos - j.yPos) < (ySize + j.ySize) / 2.0;
 		if (xOverlap && yOverlap) {
                         if(!crashed){
-			//System.out.println("CRASH," + id);
+			System.out.println("CRASH," + id);
 			crashed = true;
                         }
                         if(!j.crashed){
-                        //System.out.println("CRASH,"+j.id);
+                        System.out.println("CRASH,"+j.id);
                         j.crashed = true;
                         }
 		}
