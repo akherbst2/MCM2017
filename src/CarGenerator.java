@@ -46,7 +46,7 @@ public class CarGenerator {
 		List<Double> possibleLaneTimes = new ArrayList<>();
 		List<Integer> possibleLaneIds = new ArrayList<>();
 		for(int a = 0; a < timeLastCar.length; a++) {
-			if((currentTime - timeLastCar[a]) > (timeTickSize * 5)) {
+			if((currentTime - timeLastCar[a]) > (timeTickSize * 12)) {
 				possibleLaneIds.add(a);
 				possibleLaneTimes.add(currentTime - timeLastCar[a]);
                 totalTimeDiff += (currentTime - timeLastCar[a]);
