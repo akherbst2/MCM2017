@@ -1,5 +1,6 @@
 #Each test run, added by Ariana
 latest_run_sim.csv
+out.out
 
 #java specifics added by Eric
 *.class
