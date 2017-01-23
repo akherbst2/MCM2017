@@ -32,7 +32,7 @@ public class CarGenerator {
 	
 	
 	public Car getCar(){
-//		int laneId = -1;
+//        		int laneId = -1;
 //		double maxTimeDiff = -1;
 //		for(int a = 0; a < timeLastCar.length; a++){
 //			if(maxTimeDiff < currentTime-timeLastCar[a]){
@@ -41,16 +41,30 @@ public class CarGenerator {
 //			}
 //		}
 
-		int laneId = -1;
-		long totalTimeDiff = 0;
+		//int laneId = -1;
+		double totalTimeDiff = 0;
 		List<Double> possibleLaneTimes = new ArrayList<>();
 		List<Integer> possibleLaneIds = new ArrayList<>();
 		for(int a = 0; a < timeLastCar.length; a++) {
-			if((currentTime - timeLastCar[a]) > 12) {
-				
+			if((currentTime - timeLastCar[a]) > (timeTickSize * 5)) {
+				possibleLaneIds.add(a);
+				possibleLaneTimes.add(currentTime - timeLastCar[a]);
+                totalTimeDiff += (currentTime - timeLastCar[a]);
 			}
-
 		}
+        int laneId = 0;
+        if(possibleLaneIds.size() > 0) {
+            double result = Math.random();
+            double currProbability = possibleLaneTimes.get(laneId) / totalTimeDiff;
+            while (result > currProbability) {
+                laneId++;
+                currProbability += (possibleLaneTimes.get(laneId) / totalTimeDiff);
+            }
+        }
+        else {
+            laneId = (int)(Math.random() * timeLastCar.length);
+        }
+
 
 		if(Math.random() < freq * timeTickSize && road.numberOfCars() < 500){
 			carCount++;
