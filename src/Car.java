@@ -180,6 +180,7 @@ public class Car {
 		if (!(temp != null &&temp.isSmart && this.isSmart)) {
 		if (Math.abs(laneChangeState) == 1) {
                         //System.err.println("Attempting lane change " + id + " " + xPos + " " + yPos);
+
                         if(laneChangeSafe()){	
                              xVel += laneChangeState;
 			     if (xPos > (lane + laneChangeState) * laneWidth + .5 * laneWidth) {
@@ -189,6 +190,7 @@ public class Car {
                         }
                         else{
                              //System.err.println("No longer attempting lane change due to lack of room");
+
                              laneChangeState = 0;
                         }
 		}
