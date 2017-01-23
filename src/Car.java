@@ -143,31 +143,41 @@ public class Car {
 		//makeVelocityAndAccelerationDecisions(timeInterval);
 
                 Car temp = getCarInFront();
-                if(temp != null && (temp.yPos - yPos) < (100 + yVel) && yVel > 0 && temp.lane == lane){
-                    yAccel = ACCEL_LIMIT * -1;
-                }                
-                else{
-                    if(yVel < INITIAL_SPEED){
-                       yAccel = ACCEL_LIMIT; 
-                    }
+		if (temp != null && temp.isSmart && this.isSmart)
+		{
+		    this.yAccel = temp.yAccel;
+		    this.xVel = temp.xVel;
+		    this.yVel = temp.yVel;
+		    this.xAccel = temp.xAccel; 
+		}
+		else
+		{
+                    if(temp != null && (temp.yPos - yPos) < (100 + yVel) && yVel > 0 && temp.lane == lane){
+                        yAccel = ACCEL_LIMIT * -1;
+                    }                
                     else{
-                       yAccel = 0;
+                        if(yVel < INITIAL_SPEED){
+                           yAccel = ACCEL_LIMIT; 
+                        }
+                        else{
+                           yAccel = 0;
+                        }
                     }
-                }
-
+		}
                 xPos += .5 * xVel * timeInterval;
                 yPos += .5 * yVel * timeInterval;
                 
 		xVel += xAccel * timeInterval;
                 if(yAccel < 0 && yVel < yAccel*timeInterval){
                      yVel = 0;
-                }
+                } 
                 else{
 		     yVel += yAccel * timeInterval;
                 }
                 xPos += .5 * xVel * timeInterval;
                 yPos += .5 * yVel * timeInterval;
-
+		
+		if (!(temp != null &&temp.isSmart && this.isSmart)) {
 		if (Math.abs(laneChangeState) == 1) {
                         System.err.println("Attempting lane change " + id + " " + xPos + " " + yPos);
                         if(laneChangeSafe()){	
@@ -201,6 +211,7 @@ public class Car {
 			if (Math.random() < .1 && lane < Math.round(road.roadWidth / laneWidth)) {
 				laneChangeState = 1;
 			}
+		}
 		}
 
 	}
