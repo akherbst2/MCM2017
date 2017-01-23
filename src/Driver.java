@@ -27,6 +27,7 @@ public class Driver {
 
 
 		}
-        System.out.print("Average total velocity = " + road.getAverageVelocity_MPH() + " Miles Per hour");
+        System.out.println("Average total velocity of human cars= " + road.getAverageVelocity_HumanCars_MPH() + " Miles Per Hour");
+        System.out.println("Average total velocity of smart cars= " + road.getAverageVelocity_SmartCars_MPH() + " Miles Per Hour");
 	}
 }

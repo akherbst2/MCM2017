@@ -6,16 +6,17 @@ import java.util.LinkedList;
 public class Road {
 	double roadWidth;
 	LinkedList<Car> carList;
-	long totalAvgVelocity;
-	long totalIntervals;
-	long totalCars;
+	long totalIntervalsWithHumanCar;
+    long totalIntervalsWithSmartCar;
+    long totalAvgVelocitySmart;
+    long totalAvgVelocityHuman;
+    final double FT_PER_SECOND_TO_MPH = 0.6818182;
 
-
-	public Road(double roadWidth) {
+    public Road(double roadWidth) {
 		carList = new LinkedList<Car>();
 		this.roadWidth = roadWidth;
-		this.totalAvgVelocity = 0;
-		this.totalIntervals = 0;
+		this.totalAvgVelocityHuman = 0;
+		this.totalIntervalsWithHumanCar = 0;
 	}
 
 	public void addCar(Car c) {
@@ -25,14 +26,33 @@ public class Road {
 		return carList.size();
 	}
 	public void executeTime(double timeInterval) {
-		totalIntervals++;
-        long myVel = 0;
+        boolean hasEncounteredHuman = false;
+        boolean hasEncounteredSmart = false;
+        long totalVelocitiesHuman = 0;
+        long totalVelocitiesSmart = 0;
+        long totalHumanCars = 0;
+        long totalSmartCars = 0;
 		for (Car i : carList) {
 			i.move(timeInterval);
-			myVel += i.yVel;
-
+            if(i.isSmart) {
+                totalVelocitiesSmart += i.yVel;
+                totalSmartCars++;
+                hasEncounteredSmart = true;
+            }
+            else {
+                totalVelocitiesHuman += i.yVel;
+                totalHumanCars++;
+                hasEncounteredHuman = true;
+            }
 		}
-        totalAvgVelocity += ((myVel * 1.0) / carList.size());
+        totalAvgVelocityHuman += ((totalVelocitiesHuman * 1.0) / totalHumanCars);
+        totalAvgVelocitySmart += ((totalVelocitiesSmart * 1.0) / totalSmartCars);
+        if(hasEncounteredHuman) {
+            totalIntervalsWithHumanCar++;
+        }
+        if(hasEncounteredSmart) {
+            totalIntervalsWithSmartCar++;
+        }
 		// CollisionCheck
 		for (Car i : carList) {
 			for (Car j : carList) {
@@ -56,16 +76,23 @@ public class Road {
 				System.out.println("STOP," + i.id);
 			}
 		}
-
 	}
 
-	public double getAverageVelocity_ftPerSec() {
-		return (1.0 * totalAvgVelocity) / totalIntervals;
+	public double getAverageVelocity_HumanCars_ftPerSec() {
+		return (1.0 * totalAvgVelocityHuman) / totalIntervalsWithHumanCar;
 	}
 
-	public double getAverageVelocity_MPH() {
-		return getAverageVelocity_ftPerSec() * 0.6818182;
+	public double getAverageVelocity_HumanCars_MPH() {
+		return getAverageVelocity_HumanCars_ftPerSec() * FT_PER_SECOND_TO_MPH;
 	}
+
+    public double getAverageVelocity_SmartCars_ftPerSec() {
+        return (1.0 * totalAvgVelocitySmart) / totalIntervalsWithSmartCar;
+    }
+
+    public double getAverageVelocity_SmartCars_MPH() {
+        return getAverageVelocity_SmartCars_ftPerSec() * FT_PER_SECOND_TO_MPH;
+    }
 
 	public void printState(double time) {
 		for (Car i : carList) {
