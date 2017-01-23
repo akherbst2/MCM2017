@@ -129,7 +129,7 @@ public class Car {
                for(Car i: road.carList){
                    if(i.id != id){
                        if(Math.abs(fakeX-i.xPos) < 12 && Math.abs(fakeY-i.yPos) < 100){
-      //                     System.err.println("Lane change was not safe becase: " + Math.abs(fakeX-i.xPos) + " " + Math.abs(fakeY-i.yPos));
+                           //System.err.println("Lane change was not safe becase: " + Math.abs(fakeX-i.xPos) + " " + Math.abs(fakeY-i.yPos));
                            return false;
                        }  
                    }
@@ -179,7 +179,8 @@ public class Car {
 		
 		if (!(temp != null &&temp.isSmart && this.isSmart)) {
 		if (Math.abs(laneChangeState) == 1) {
-   //                     System.err.println("Attempting lane change " + id + " " + xPos + " " + yPos);
+                        //System.err.println("Attempting lane change " + id + " " + xPos + " " + yPos);
+
                         if(laneChangeSafe()){	
                              xVel += laneChangeState;
 			     if (xPos > (lane + laneChangeState) * laneWidth + .5 * laneWidth) {
@@ -188,7 +189,8 @@ public class Car {
 			     }
                         }
                         else{
- //                            System.err.println("No longer attempting lane change due to lack of room");
+                             //System.err.println("No longer attempting lane change due to lack of room");
+
                              laneChangeState = 0;
                         }
 		}
@@ -228,11 +230,11 @@ public class Car {
 		boolean yOverlap = Math.abs(yPos - j.yPos) < (ySize + j.ySize) / 2.0;
 		if (xOverlap && yOverlap) {
                         if(!crashed){
-			System.out.println("CRASH," + id);
+			//System.out.println("CRASH," + id);
 			crashed = true;
                         }
                         if(!j.crashed){
-                        System.out.println("CRASH,"+j.id);
+                        //System.out.println("CRASH,"+j.id);
                         j.crashed = true;
                         }
 		}
